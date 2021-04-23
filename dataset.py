@@ -35,7 +35,7 @@ class MultimodalDataset(Dataset):
         for cls in self.split_classes:
             path_imgs = os.path.join(data_dir, 'images', cls + '.t7')
             path_txts = os.path.join(data_dir, 'text_c10', cls + '.t7')
-            cls_imgs = torch.Tensor(torch.load(path_imgs))
+            cls_imgs = torch.Tensor(torch.load(path_imgs).float())
             cls_txts = torch.LongTensor(torchfile.load(path_txts))
             self.data[cls] = (cls_imgs, cls_txts)
 
