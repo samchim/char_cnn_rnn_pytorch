@@ -61,4 +61,9 @@ class MultimodalDataset(Dataset):
         txt = cls_txts[id_instance, :, id_txt].squeeze()
         txt = labelvec_to_onehot(txt)
 
+        img = torch.autograd.Variable(img,requires_grad = False)
+        img = img.data
+        txt = torch.autograd.Variable(txt,requires_grad = False)
+        txt = txt.data
+
         return {'img': img, 'txt': txt}
