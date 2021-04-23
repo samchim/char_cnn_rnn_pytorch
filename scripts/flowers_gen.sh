@@ -1,4 +1,4 @@
-python3 sje_eval.py \
+python3 sje_gen_embedding.py \
     --seed 123 \
     --use_gpu True \
     --dataset flowers \

@@ -65,7 +65,7 @@ def main(args):
     acc1_smooth = acc2_smooth = 0
 
     for epoch in tqdm(range(args.epochs), position=1):
-        for i, data in enumerate(tqdm(loader, position=0)):
+        for i, data in enumerate(loader, position=0):
             iter_num = (epoch * loader_len) + i + 1
 
             net_txt.train()
