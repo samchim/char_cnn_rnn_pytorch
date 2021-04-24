@@ -48,10 +48,11 @@ def encode_data(net_txt, net_img, data_dir, split, num_txts_eval, batch_size, de
 
     cls_feats_img = []
     cls_feats_txt = []
-    for cls in cls_list:
+    for cls in tqdm(cls_list):
         # prepare image data
         data_img_path = os.path.join(data_dir, 'images', cls + '.t7')
-        data_img = torch.Tensor(torchfile.load(data_img_path))
+        data_img = torch.Tensor(torch.load(data_img_path).float())
+        # data_img = torch.Tensor(torchfile.load(data_img_path))
         # cub and flowers datasets have 10 image crops per instance
         # we use only the first crop per instance
         feats_img = data_img[:, :, 0].to(device)
@@ -62,7 +63,8 @@ def encode_data(net_txt, net_img, data_dir, split, num_txts_eval, batch_size, de
 
         # prepare text data
         data_txt_path = os.path.join(data_dir, 'text_c10', cls + '.t7')
-        data_txt = torch.LongTensor(torchfile.load(data_txt_path))
+        data_txt = torch.LongTensor(torch.load(data_txt_path).long())
+        # data_txt = torch.LongTensor(torchfile.load(data_txt_path))
 
         # select T texts from all instances to represent this class
         data_txt = data_txt.permute(0, 2, 1)
@@ -155,7 +157,7 @@ def eval_retrieval(cls_feats_img, cls_feats_txt, cls_list, k_values=[1,5,10,50])
     scores = torch.zeros(total_num_cls, total_num_img)
     matches = torch.zeros(total_num_cls, total_num_img)
 
-    for i, cls in enumerate(cls_list):
+    for i, cls in tqdm(enumerate(cls_list)):
         start_id = 0
         for j, feats_img in enumerate(cls_feats_img):
             end_id = start_id + feats_img.size(0)

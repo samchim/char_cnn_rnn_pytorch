@@ -1,0 +1,12 @@
+python3 sje_train.py \
+    --seed 3359 \
+    --use_gpu True \
+    --dataset birds \
+    --model_type icml \
+    --data_dir data/movie_data \
+    --train_split trainval \
+    --learning_rate 0.0007 \
+    --symmetric True \
+    --epochs 200 \
+    --checkpoint_dir ckpt \
+    --save_file sje_movie_data

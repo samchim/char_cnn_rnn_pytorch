@@ -51,7 +51,7 @@ def encode_data(net_txt, net_img, data_dir, split, num_txts_eval, batch_size, de
     for cls in tqdm(cls_list):
         # prepare image data
         data_img_path = os.path.join(data_dir, 'images', cls + '.t7')
-        data_img = torch.Tensor(torchfile.load(data_img_path))
+        data_img = torch.Tensor(torch.load(data_img_path).float())
         # cub and flowers datasets have 10 image crops per instance
         # we use only the first crop per instance
         feats_img = data_img[:, :, 0].to(device)
@@ -62,7 +62,7 @@ def encode_data(net_txt, net_img, data_dir, split, num_txts_eval, batch_size, de
 
         # prepare text data
         data_txt_path = os.path.join(data_dir, 'text_c10', cls + '.t7')
-        data_txt = torch.LongTensor(torchfile.load(data_txt_path))
+        data_txt = torch.LongTensor(torch.load(data_txt_path).long())
 
         # select T texts from all instances to represent this class
         data_txt = data_txt.permute(0, 2, 1)

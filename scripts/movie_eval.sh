@@ -1,0 +1,11 @@
+python3 sje_eval.py \
+    --seed 3359 \
+    --use_gpu True \
+    --dataset birds \
+    --model_type icml \
+    --data_dir data/movie_data \
+    --eval_split test \
+    --num_txts_eval 0 \
+    --print_class_stats True \
+    --batch_size 40 \
+    --model_path ckpt/sje_movie_data/sje_movie_data_0.00070_True_trainval_2021_04_24_05_06_44.pth
